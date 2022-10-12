@@ -1,4 +1,6 @@
 let turnCounter = 0
+
+//Creates the 3x3 square to put individual games in
 let bigTable = document.getElementById("bigTable")
 let idGiver = 1
 for(let i=1; i<=3; i++){
@@ -12,7 +14,7 @@ for(let i=1; i<=3; i++){
     }
     bigTable.appendChild(trr)
 }
-
+//creates individual games
 let trr2 = document.querySelectorAll(".indieGames")
 
 idGiver = 1
@@ -23,7 +25,7 @@ for(let i=0; i<trr2.length; i++){
         let trr = document.createElement("tr")
         for(n=0; n<3; n++){
             let square = document.createElement("td")
-            square.className = "indieBoxes"
+            square.className = `indieBoxes` 
             square.id = `box-${idGiver}-${idGiver2}`
             square.addEventListener("click", function(){playerTurn(square.id)})
             trr.appendChild(square)
@@ -34,27 +36,41 @@ for(let i=0; i<trr2.length; i++){
     idGiver++
 }
 
-let redX= document.createElement("img")
-
+let boxCheck = 5;
 
 function playerTurn(event){
    let box = document.getElementById(event)
+
+   let idGet = box.id
+   console.log(idGet)
+   let idConv = idGet.charAt(4)
+   let gameSwap = idGet.charAt(6)
    
-    if (turnCounter%2 == 0){
-        let redX= document.createElement("img")
-        redX.src = "./img/red-x.png"
-        redX.className = "redX"
-        console.log("this dude clicked on evens")
-        console.log(event)
-        box.appendChild(redX)
+    if (turnCounter%2 == 0 && box.innerText== "" && boxCheck == idConv){
         
+        box.textContent = "X"
+        console.log("this dude clicked on evens")
+        let test = box.innerText 
+        console.log(test);
+        alerter.textContent = "O's turn"
+        boxCheck = gameSwap
+   }
+   else if (turnCounter%2 == 1 && box.innerText=="" && boxCheck == idConv){
+    console.log("this dude clicked on odds")
+    box.textContent = "O"
+    alerter.textContent = "X's turn"
+    boxCheck = gameSwap
+   }
+   else if(box.innerText != ""){
+    alerter.textContent = "Click on an empty space"
+    turnCounter--
    }
    else{
-    console.log("this dude clicked on odds")
-    let blackO = document.createElement("img")
-    blackO.src = "./img/o.png"
-    blackO.className = "blackO"
-    box.appendChild(blackO)
+    alerter.textContent = `Please play in the correct game`
+    turnCounter--
    }
+   
    turnCounter++
+   console.log(boxCheck)
 }
+
