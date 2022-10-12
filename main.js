@@ -25,7 +25,7 @@ for(let i=0; i<trr2.length; i++){
         let trr = document.createElement("tr")
         for(n=0; n<3; n++){
             let square = document.createElement("td")
-            square.className = `indieBoxes` 
+            square.className = `indieBoxes game${idGiver}` 
             square.id = `box-${idGiver}-${idGiver2}`
             square.addEventListener("click", function(){playerTurn(square.id)})
             trr.appendChild(square)
@@ -72,5 +72,34 @@ function playerTurn(event){
    
    turnCounter++
    console.log(boxCheck)
+
+   smallWin(idGet)
 }
 
+function smallWin(event){
+    let getGame = event.charAt(4)
+    let currentGame = document.querySelector(`#game-${getGame}`)
+    let boxes = document.querySelectorAll(`.game${getGame}`)
+    let plays = [];
+
+    for(let i=0; i<boxes.length; i++){
+        plays.push(boxes[i].innerHTML)
+    }
+    console.log(plays[event.charAt(6)])
+    
+    if(plays[0]=="x" && plays[1]=="x" && plays[2]=="x" || plays[3]=="x" && plays[4]=="x" && plays[5]=="x" || plays[6]=="x" && plays[7]=="x" && plays[8]=="x" ||
+        plays[0]=="x" && plays[3]=="x" && plays[6]=="x" || plays[1]=="x" && plays[4]=="x" && plays[7]=="x" || plays[2]=="x" && plays[5]=="x" && plays[8]=="x" || 
+        plays[0]=="x" && plays[4]=="x" && plays[8]=="x" || plays[2]=="x" && plays[4]=="x" && plays[6]=="x")
+        {
+            console.log("x win game")
+    }
+    else if(plays[0]=="o" && plays[1]=="o" && plays[2]=="o" || plays[3]=="o" && plays[4]=="o" && plays[5]=="o" || plays[6]=="o" && plays[7]=="o" && plays[8]=="o" ||
+    plays[0]=="o" && plays[3]=="o" && plays[6]=="o" || plays[1]=="o" && plays[4]=="o" && plays[7]=="o" || plays[2]=="o" && plays[5]=="o" && plays[8]=="o" || 
+    plays[0]=="o" && plays[4]=="o" && plays[8]=="o" || plays[2]=="o" && plays[4]=="o" && plays[6]=="o")
+    {
+        console.log("o win game")
+}
+    else{
+        console.log("no current game win")
+    }
+}
