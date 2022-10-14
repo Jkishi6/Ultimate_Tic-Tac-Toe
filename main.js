@@ -60,31 +60,50 @@ function playerTurn(event){
         //X's turn
         box.textContent = "X"
         console.log(gameWon[prevMove -1])
+            let highlight = document.querySelector(`#game-${gameSwap}`)
+            highlight.classList.add("highlight")
+            let deHighlight = document.querySelector(`#game-${prevMove}`)
+            deHighlight.classList.remove("highlight")
         prevMove = gameSwap
         console.log(prevMove)
         alerter.textContent = "O's turn"
         boxCheck = gameSwap
+        
    }
    else if (gameWon[prevMove - 1] == false && turnCounter%2 == 1 && box.innerText=="" && boxCheck == idConv){
     //O's turn
     console.log(gameWon[prevMove -1])
     box.textContent = "O"
+        let highlight = document.querySelector(`#game-${gameSwap}`)
+        highlight.classList.add("highlight")
+        let deHighlight = document.querySelector(`#game-${prevMove}`)
+        deHighlight.classList.remove("highlight")
     prevMove = gameSwap
     console.log(prevMove)
     alerter.textContent = "X's turn"
     boxCheck = gameSwap
    }
    else if(gameWon[prevMove - 1] == true && turnCounter%2 == 0 && box.innerText==""){
+    //X's turn for free move if next game is already won
     box.textContent = "X"
     console.log(gameWon[prevMove -1])
+        let highlight = document.querySelector(`#game-${gameSwap}`)
+        highlight.classList.add("highlight")
+        let deHighlight = document.querySelector(`#game-${prevMove}`)
+        deHighlight.classList.remove("highlight")
     prevMove = gameSwap
     console.log(prevMove)
     alerter.textContent = "O's turn"
     boxCheck = gameSwap
    }
    else if(gameWon[prevMove - 1] == true && turnCounter%2 == 1 && box.innerText==""){
+    //O's turn for free move if next game is already won
     box.textContent = "O"
     console.log(gameWon[prevMove -1])
+        let highlight = document.querySelector(`#game-${gameSwap}`)
+        highlight.classList.add("highlight")
+        let deHighlight = document.querySelector(`#game-${prevMove}`)
+        deHighlight.classList.remove("highlight")
     prevMove = gameSwap
     console.log(prevMove)
     alerter.textContent = "X's turn"
