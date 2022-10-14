@@ -1,5 +1,7 @@
 let turnCounter = 0
 
+let gameWon = new Array(9).fill(false)
+
 //Creates the 3x3 square to put individual games in
 let bigTable = document.getElementById("bigTable")
 let idGiver = 1
@@ -41,13 +43,14 @@ let boxCheck = 5;
 function playerTurn(event){
    let box = document.getElementById(event)
 
+   // id = box-(idConv)-(gameSwap)
    let idGet = box.id
    console.log(idGet)
-   let idConv = idGet.charAt(4)
-   let gameSwap = idGet.charAt(6)
+   let idConv = idGet.charAt(4) //current game
+   let gameSwap = idGet.charAt(6) //next game
    
-    if (turnCounter%2 == 0 && box.innerText== "" && boxCheck == idConv){
-        
+    if (turnCounter%2 == 0 && box.innerText== "" && boxCheck == idConv && gameWon[gameSwap - 1] == false){
+        //X's turn
         box.textContent = "X"
         console.log("this dude clicked on evens")
         let test = box.innerText 
@@ -55,7 +58,8 @@ function playerTurn(event){
         alerter.textContent = "O's turn"
         boxCheck = gameSwap
    }
-   else if (turnCounter%2 == 1 && box.innerText=="" && boxCheck == idConv){
+   else if (turnCounter%2 == 1 && box.innerText=="" && boxCheck == idConv && gameWon[gameSwap - 1] == false){
+    //O's turn
     console.log("this dude clicked on odds")
     box.textContent = "O"
     alerter.textContent = "X's turn"
@@ -87,17 +91,26 @@ function smallWin(event){
     }
     console.log(plays[event.charAt(6)])
     
-    if(plays[0]=="x" && plays[1]=="x" && plays[2]=="x" || plays[3]=="x" && plays[4]=="x" && plays[5]=="x" || plays[6]=="x" && plays[7]=="x" && plays[8]=="x" ||
-        plays[0]=="x" && plays[3]=="x" && plays[6]=="x" || plays[1]=="x" && plays[4]=="x" && plays[7]=="x" || plays[2]=="x" && plays[5]=="x" && plays[8]=="x" || 
-        plays[0]=="x" && plays[4]=="x" && plays[8]=="x" || plays[2]=="x" && plays[4]=="x" && plays[6]=="x")
+    if(plays[0]=="X" && plays[1]=="X" && plays[2]=="X" || plays[3]=="X" && plays[4]=="X" && plays[5]=="X" || plays[6]=="X" && plays[7]=="X" && plays[8]=="X" ||
+        plays[0]=="X" && plays[3]=="X" && plays[6]=="X" || plays[1]=="X" && plays[4]=="X" && plays[7]=="X" || plays[2]=="X" && plays[5]=="X" && plays[8]=="X" || 
+        plays[0]=="X" && plays[4]=="X" && plays[8]=="X" || plays[2]=="X" && plays[4]=="X" && plays[6]=="X")
         {
             console.log("x win game")
+
+            currentGame.innerHTML = "X"
+            gameWon[getGame - 1] = true
+            console.log(gameWon)
+
     }
-    else if(plays[0]=="o" && plays[1]=="o" && plays[2]=="o" || plays[3]=="o" && plays[4]=="o" && plays[5]=="o" || plays[6]=="o" && plays[7]=="o" && plays[8]=="o" ||
-    plays[0]=="o" && plays[3]=="o" && plays[6]=="o" || plays[1]=="o" && plays[4]=="o" && plays[7]=="o" || plays[2]=="o" && plays[5]=="o" && plays[8]=="o" || 
-    plays[0]=="o" && plays[4]=="o" && plays[8]=="o" || plays[2]=="o" && plays[4]=="o" && plays[6]=="o")
+    else if(plays[0]=="O" && plays[1]=="O" && plays[2]=="O" || plays[3]=="O" && plays[4]=="O" && plays[5]=="O" || plays[6]=="O" && plays[7]=="O" && plays[8]=="O" ||
+    plays[0]=="O" && plays[3]=="O" && plays[6]=="O" || plays[1]=="O" && plays[4]=="O" && plays[7]=="O" || plays[2]=="O" && plays[5]=="O" && plays[8]=="O" || 
+    plays[0]=="O" && plays[4]=="O" && plays[8]=="O" || plays[2]=="O" && plays[4]=="O" && plays[6]=="O")
     {
         console.log("o win game")
+
+        currentGame.innerHTML = "O"
+            gameWon[getGame - 1] = true
+            console.log(gameWon)
 }
     else{
         console.log("no current game win")
