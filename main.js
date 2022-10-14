@@ -38,6 +38,7 @@ for(let i=0; i<trr2.length; i++){
     idGiver++
 }
 
+let prevMove =5;
 let boxCheck = 5;
 
 function playerTurn(event){
@@ -45,23 +46,41 @@ function playerTurn(event){
 
    // id = box-(idConv)-(gameSwap)
    let idGet = box.id
-   console.log(idGet)
+   //console.log(idGet)
    let idConv = idGet.charAt(4) //current game
    let gameSwap = idGet.charAt(6) //next game
    
-    if (turnCounter%2 == 0 && box.innerText== "" && boxCheck == idConv && gameWon[gameSwap - 1] == false){
+    if (gameWon[prevMove - 1] == false && turnCounter%2 == 0 && box.innerText== "" && boxCheck == idConv){
         //X's turn
         box.textContent = "X"
-        console.log("this dude clicked on evens")
-        let test = box.innerText 
-        console.log(test);
+        console.log(gameWon[prevMove -1])
+        prevMove = gameSwap
+        console.log(prevMove)
         alerter.textContent = "O's turn"
         boxCheck = gameSwap
    }
-   else if (turnCounter%2 == 1 && box.innerText=="" && boxCheck == idConv && gameWon[gameSwap - 1] == false){
+   else if (gameWon[prevMove - 1] == false && turnCounter%2 == 1 && box.innerText=="" && boxCheck == idConv){
     //O's turn
-    console.log("this dude clicked on odds")
+    console.log(gameWon[prevMove -1])
     box.textContent = "O"
+    prevMove = gameSwap
+    console.log(prevMove)
+    alerter.textContent = "X's turn"
+    boxCheck = gameSwap
+   }
+   else if(gameWon[prevMove - 1] == true && turnCounter%2 == 0 && box.innerText==""){
+    box.textContent = "X"
+    console.log(gameWon[prevMove -1])
+    prevMove = gameSwap
+    console.log(prevMove)
+    alerter.textContent = "O's turn"
+    boxCheck = gameSwap
+   }
+   else if(gameWon[prevMove - 1] == true && turnCounter%2 == 1 && box.innerText==""){
+    box.textContent = "O"
+    console.log(gameWon[prevMove -1])
+    prevMove = gameSwap
+    console.log(prevMove)
     alerter.textContent = "X's turn"
     boxCheck = gameSwap
    }
@@ -71,11 +90,12 @@ function playerTurn(event){
    }
    else{
     alerter.textContent = `Please play in the correct game`
+    console.log(prevMove)
     turnCounter--
    }
    
    turnCounter++
-   console.log(boxCheck)
+   //console.log(boxCheck)
 
    smallWin(idGet)
 }
@@ -89,7 +109,7 @@ function smallWin(event){
     for(let i=0; i<boxes.length; i++){
         plays.push(boxes[i].innerHTML)
     }
-    console.log(plays[event.charAt(6)])
+    //console.log(plays[event.charAt(6)])
     
     if(plays[0]=="X" && plays[1]=="X" && plays[2]=="X" || plays[3]=="X" && plays[4]=="X" && plays[5]=="X" || plays[6]=="X" && plays[7]=="X" && plays[8]=="X" ||
         plays[0]=="X" && plays[3]=="X" && plays[6]=="X" || plays[1]=="X" && plays[4]=="X" && plays[7]=="X" || plays[2]=="X" && plays[5]=="X" && plays[8]=="X" || 
