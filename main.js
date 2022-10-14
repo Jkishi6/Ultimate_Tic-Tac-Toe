@@ -2,41 +2,47 @@ let turnCounter = 0
 
 let gameWon = new Array(9).fill(false)
 
-//Creates the 3x3 square to put individual games in
-let bigTable = document.getElementById("bigTable")
-let idGiver = 1
-for(let i=1; i<=3; i++){
-    let trr = document.createElement("tr")
-    for(n=1; n<=3; n++){
-        let square = document.createElement("td")
-        square.className = "indieGames"
-        square.id = `game-${idGiver}`
-        trr.appendChild(square)
+let gameOver = false;
+
+function makeTable(){
+    //Creates the 3x3 square to put individual games in
+    let bigTable = document.getElementById("bigTable")
+    let idGiver = 1
+    for(let i=1; i<=3; i++){
+        let trr = document.createElement("tr")
+        for(n=1; n<=3; n++){
+            let square = document.createElement("td")
+            square.className = "indieGames"
+            square.id = `game-${idGiver}`
+            trr.appendChild(square)
+            idGiver++
+        }
+        bigTable.appendChild(trr)
+    }
+    //creates individual games
+    let trr2 = document.querySelectorAll(".indieGames")
+
+    idGiver = 1
+
+    for(let i=0; i<trr2.length; i++){
+        let idGiver2 = 1
+        for(let x=0; x<3; x++){
+            let trr = document.createElement("tr")
+            for(n=0; n<3; n++){
+                let square = document.createElement("td")
+                square.className = `indieBoxes game${idGiver}` 
+                square.id = `box-${idGiver}-${idGiver2}`
+                square.addEventListener("click", function(){playerTurn(square.id)})
+                trr.appendChild(square)
+                idGiver2++
+            }
+            trr2[i].appendChild(trr)
+        }
         idGiver++
     }
-    bigTable.appendChild(trr)
 }
-//creates individual games
-let trr2 = document.querySelectorAll(".indieGames")
 
-idGiver = 1
-
-for(let i=0; i<trr2.length; i++){
-    let idGiver2 = 1
-    for(let x=0; x<3; x++){
-        let trr = document.createElement("tr")
-        for(n=0; n<3; n++){
-            let square = document.createElement("td")
-            square.className = `indieBoxes game${idGiver}` 
-            square.id = `box-${idGiver}-${idGiver2}`
-            square.addEventListener("click", function(){playerTurn(square.id)})
-            trr.appendChild(square)
-            idGiver2++
-        }
-        trr2[i].appendChild(trr)
-    }
-    idGiver++
-}
+makeTable();
 
 let prevMove =5;
 let boxCheck = 5;
@@ -98,6 +104,12 @@ function playerTurn(event){
    //console.log(boxCheck)
 
    smallWin(idGet)
+   bigWin()
+
+   if(gameOver == true){
+        let reset = document.getElementById(bigTable)
+        reset.replaceWith(reset.cloneNode(true))
+   }
 }
 
 function smallWin(event){
@@ -131,6 +143,33 @@ function smallWin(event){
         currentGame.innerHTML = "O"
             gameWon[getGame - 1] = true
             console.log(gameWon)
+}
+    else{
+        console.log("no current game win")
+    }
+}
+
+function bigWin(){
+    let games = document.querySelectorAll(".indieGames");
+    let plays = []
+
+    for(let i=0; i<games.length; i++){
+        plays.push(games[i].innerHTML)
+    }
+
+    if(plays[0]=="X" && plays[1]=="X" && plays[2]=="X" || plays[3]=="X" && plays[4]=="X" && plays[5]=="X" || plays[6]=="X" && plays[7]=="X" && plays[8]=="X" ||
+        plays[0]=="X" && plays[3]=="X" && plays[6]=="X" || plays[1]=="X" && plays[4]=="X" && plays[7]=="X" || plays[2]=="X" && plays[5]=="X" && plays[8]=="X" || 
+        plays[0]=="X" && plays[4]=="X" && plays[8]=="X" || plays[2]=="X" && plays[4]=="X" && plays[6]=="X")
+        {
+            gameOver = true
+            alerter.textContent = "X wins!"
+    }
+    else if(plays[0]=="O" && plays[1]=="O" && plays[2]=="O" || plays[3]=="O" && plays[4]=="O" && plays[5]=="O" || plays[6]=="O" && plays[7]=="O" && plays[8]=="O" ||
+    plays[0]=="O" && plays[3]=="O" && plays[6]=="O" || plays[1]=="O" && plays[4]=="O" && plays[7]=="O" || plays[2]=="O" && plays[5]=="O" && plays[8]=="O" || 
+    plays[0]=="O" && plays[4]=="O" && plays[8]=="O" || plays[2]=="O" && plays[4]=="O" && plays[6]=="O")
+    {
+        gameOver = true
+        alerter.textContent = "O wins!"
 }
     else{
         console.log("no current game win")
