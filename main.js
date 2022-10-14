@@ -175,3 +175,19 @@ function bigWin(){
         console.log("no current game win")
     }
 }
+
+let resetButton = document.querySelector("#resetButton");
+resetButton.addEventListener("click", function(){
+    let bigTable = document.querySelector("#bigTable")
+    let container = document.querySelector("#table-container")
+    bigTable.remove()
+    let newTable = document.createElement("table")
+    newTable.id = "bigTable"
+    newTable.className = "mainTable"
+    container.appendChild(newTable)
+    makeTable()
+    gameOver = false
+    turnCounter = 0
+    gameWon = []
+    gameWon = new Array(9).fill(false)
+})
