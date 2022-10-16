@@ -55,7 +55,15 @@ body{
     border-width: 2px;
 }
 
-.bigLetter{
+.bigO{
+    height: 130px;
+    width: 130px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.bigX{
     height: 130px;
     width: 130px;
     display: block;

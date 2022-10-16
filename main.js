@@ -150,7 +150,7 @@ function smallWin(event){
         {
             console.log("x win game")
 
-            currentGame.innerHTML = `<img src="./img/red-x.png" class="bigLetter">`
+            currentGame.innerHTML = `<img src="./img/red-x.png" class="bigX">`
             gameWon[getGame - 1] = true
             console.log(gameWon)
 
@@ -162,7 +162,7 @@ function smallWin(event){
     {
         console.log("o win game")
 
-        currentGame.innerHTML = `<img src="./img/red-o.png" class="bigLetter">`
+        currentGame.innerHTML = `<img src="./img/red-o.png" class="bigO">`
             gameWon[getGame - 1] = true
             console.log(gameWon)
 }
@@ -175,24 +175,27 @@ function smallWin(event){
 function bigWin(){
     //setting initial check variables
     let games = document.querySelectorAll(".indieGames");
-    let plays = []
+    let plays = [];
+    X = '<img src="./img/red-x.png" class="bigX">';
+    O = '<img src="./img/red-o.png" class="bigO">';
 
     for(let i=0; i<games.length; i++){
         plays.push(games[i].innerHTML)
     }
+    console.log(plays)
 
     //check for if x wins whole game
-    if(plays[0]=="X" && plays[1]=="X" && plays[2]=="X" || plays[3]=="X" && plays[4]=="X" && plays[5]=="X" || plays[6]=="X" && plays[7]=="X" && plays[8]=="X" ||
-        plays[0]=="X" && plays[3]=="X" && plays[6]=="X" || plays[1]=="X" && plays[4]=="X" && plays[7]=="X" || plays[2]=="X" && plays[5]=="X" && plays[8]=="X" || 
-        plays[0]=="X" && plays[4]=="X" && plays[8]=="X" || plays[2]=="X" && plays[4]=="X" && plays[6]=="X")
+    if(plays[0] ==X && plays[1] ==X && plays[2] ==X || plays[3] ==X && plays[4] ==X && plays[5] ==X || plays[6] ==X && plays[7] ==X && plays[8] ==X ||
+        plays[0] ==X && plays[3] ==X && plays[6] ==X || plays[1] ==X && plays[4] ==X && plays[7] ==X || plays[2] ==X && plays[5] ==X && plays[8] ==X || 
+        plays[0] ==X && plays[4] ==X && plays[8] ==X || plays[2] ==X && plays[4] ==X && plays[6] ==X)
         {
             gameOver = true
             alerter.textContent = "X wins!"
     }
     //check for if o wins whole game
-    else if(plays[0]=="O" && plays[1]=="O" && plays[2]=="O" || plays[3]=="O" && plays[4]=="O" && plays[5]=="O" || plays[6]=="O" && plays[7]=="O" && plays[8]=="O" ||
-    plays[0]=="O" && plays[3]=="O" && plays[6]=="O" || plays[1]=="O" && plays[4]=="O" && plays[7]=="O" || plays[2]=="O" && plays[5]=="O" && plays[8]=="O" || 
-    plays[0]=="O" && plays[4]=="O" && plays[8]=="O" || plays[2]=="O" && plays[4]=="O" && plays[6]=="O")
+    else if(plays[0]==O && plays[1]==O && plays[2]==O || plays[3]==O && plays[4]==O && plays[5]==O || plays[6]==O && plays[7]==O && plays[8]==O ||
+    plays[0]==O && plays[3]==O && plays[6]==O || plays[1]==O && plays[4]==O && plays[7]==O || plays[2]==O && plays[5]==O && plays[8]==O || 
+    plays[0]==O && plays[4]==O && plays[8]==O || plays[2]==O && plays[4]==O && plays[6]==O)
     {
         gameOver = true
         alerter.textContent = "O wins!"
@@ -217,4 +220,6 @@ resetButton.addEventListener("click", function(){
     turnCounter = 0
     gameWon = []
     gameWon = new Array(9).fill(false)
+    prevMove =5;
+    boxCheck = 5;
 })
