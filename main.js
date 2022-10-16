@@ -44,6 +44,9 @@ function makeTable(){
 
 makeTable();
 
+let startingBox = document.querySelector("#game-5")
+startingBox.classList.add("highlight")
+
 let prevMove =5;
 let boxCheck = 5;
 
@@ -223,4 +226,6 @@ resetButton.addEventListener("click", function(){
     boxCheck = 5;
     let alerter = document.querySelector("#alerter")
     alerter.textContent = "X's turn"
+    let resetStart = document.querySelector("#game-5")
+    resetStart.classList.add("highlight")
 })
