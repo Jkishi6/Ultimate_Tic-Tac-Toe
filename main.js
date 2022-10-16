@@ -222,4 +222,6 @@ resetButton.addEventListener("click", function(){
     gameWon = new Array(9).fill(false)
     prevMove =5;
     boxCheck = 5;
+    let alerter = document.getElementById(alerter)
+    alerter.textContent = "X's turn"
 })
