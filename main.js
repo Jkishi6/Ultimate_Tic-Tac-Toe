@@ -182,7 +182,6 @@ function bigWin(){
     for(let i=0; i<games.length; i++){
         plays.push(games[i].innerHTML)
     }
-    console.log(plays)
 
     //check for if x wins whole game
     if(plays[0] ==X && plays[1] ==X && plays[2] ==X || plays[3] ==X && plays[4] ==X && plays[5] ==X || plays[6] ==X && plays[7] ==X && plays[8] ==X ||
@@ -222,6 +221,6 @@ resetButton.addEventListener("click", function(){
     gameWon = new Array(9).fill(false)
     prevMove =5;
     boxCheck = 5;
-    let alerter = document.getElementById(alerter)
+    let alerter = document.querySelector("#alerter")
     alerter.textContent = "X's turn"
 })
