@@ -131,6 +131,7 @@ function playerTurn(event){
    }
 }
 
+//small game win check
 function smallWin(event){
     let getGame = event.charAt(4)
     let currentGame = document.querySelector(`#game-${getGame}`)
@@ -142,24 +143,26 @@ function smallWin(event){
     }
     //console.log(plays[event.charAt(6)])
     
+    //checks if x win small game
     if(plays[0]=="X" && plays[1]=="X" && plays[2]=="X" || plays[3]=="X" && plays[4]=="X" && plays[5]=="X" || plays[6]=="X" && plays[7]=="X" && plays[8]=="X" ||
         plays[0]=="X" && plays[3]=="X" && plays[6]=="X" || plays[1]=="X" && plays[4]=="X" && plays[7]=="X" || plays[2]=="X" && plays[5]=="X" && plays[8]=="X" || 
-        plays[0]=="X" && plays[4]=="X" && plays[8]=="X" || plays[2]=="X" && plays[4]=="X" && plays[6]=="X")
+        plays[0]=="X" && plays[4]=="X" && plays[8]=="X" || plays[2]=="X" && plays[4]=="X" && plays[6]=="X") //spaghetti code for win conditions
         {
             console.log("x win game")
 
-            currentGame.innerHTML = "X"
+            currentGame.innerHTML = `<img src="./img/red-x.png" class="bigLetter">`
             gameWon[getGame - 1] = true
             console.log(gameWon)
 
     }
+    //check of o win small game
     else if(plays[0]=="O" && plays[1]=="O" && plays[2]=="O" || plays[3]=="O" && plays[4]=="O" && plays[5]=="O" || plays[6]=="O" && plays[7]=="O" && plays[8]=="O" ||
     plays[0]=="O" && plays[3]=="O" && plays[6]=="O" || plays[1]=="O" && plays[4]=="O" && plays[7]=="O" || plays[2]=="O" && plays[5]=="O" && plays[8]=="O" || 
     plays[0]=="O" && plays[4]=="O" && plays[8]=="O" || plays[2]=="O" && plays[4]=="O" && plays[6]=="O")
     {
         console.log("o win game")
 
-        currentGame.innerHTML = "O"
+        currentGame.innerHTML = `<img src="./img/red-o.png" class="bigLetter">`
             gameWon[getGame - 1] = true
             console.log(gameWon)
 }
@@ -168,7 +171,9 @@ function smallWin(event){
     }
 }
 
+//check for entire game win
 function bigWin(){
+    //setting initial check variables
     let games = document.querySelectorAll(".indieGames");
     let plays = []
 
@@ -176,6 +181,7 @@ function bigWin(){
         plays.push(games[i].innerHTML)
     }
 
+    //check for if x wins whole game
     if(plays[0]=="X" && plays[1]=="X" && plays[2]=="X" || plays[3]=="X" && plays[4]=="X" && plays[5]=="X" || plays[6]=="X" && plays[7]=="X" && plays[8]=="X" ||
         plays[0]=="X" && plays[3]=="X" && plays[6]=="X" || plays[1]=="X" && plays[4]=="X" && plays[7]=="X" || plays[2]=="X" && plays[5]=="X" && plays[8]=="X" || 
         plays[0]=="X" && plays[4]=="X" && plays[8]=="X" || plays[2]=="X" && plays[4]=="X" && plays[6]=="X")
@@ -183,6 +189,7 @@ function bigWin(){
             gameOver = true
             alerter.textContent = "X wins!"
     }
+    //check for if o wins whole game
     else if(plays[0]=="O" && plays[1]=="O" && plays[2]=="O" || plays[3]=="O" && plays[4]=="O" && plays[5]=="O" || plays[6]=="O" && plays[7]=="O" && plays[8]=="O" ||
     plays[0]=="O" && plays[3]=="O" && plays[6]=="O" || plays[1]=="O" && plays[4]=="O" && plays[7]=="O" || plays[2]=="O" && plays[5]=="O" && plays[8]=="O" || 
     plays[0]=="O" && plays[4]=="O" && plays[8]=="O" || plays[2]=="O" && plays[4]=="O" && plays[6]=="O")
@@ -195,6 +202,7 @@ function bigWin(){
     }
 }
 
+//reset button
 let resetButton = document.querySelector("#resetButton");
 resetButton.addEventListener("click", function(){
     let bigTable = document.querySelector("#bigTable")

@@ -1,19 +1,42 @@
+body{
+    background-image: url(./img/background.jpg) ;
+}
+
+#title-img{
+    height: 100px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#alerter{
+    text-align: center;
+    color: rgb(213, 0, 0);
+}
+
 #bigTable{
     width: 500px;
     height: 500px;
-    align-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: rgb(17, 17, 17);
 }
 
 .indieGames{
-    width: 50px;
-    height: 50px;
+    width: 167px;
+    height: 167px;
+    border-style: solid;
+    border-width: 2px;
+    border-color:rgba(17, 17, 17, 0)
 }
 .indieBoxes{
     width: 50px;
     height: 50px;
     border-style: solid;
-    border-color: black;
+    border-color: gray;
     border-width: 2px;
+    text-align: center;
+    color: rgb(213, 0, 0);
 }
 
 .redX{
@@ -28,6 +51,26 @@
 
 .highlight{
     border-style: solid;
-    border-color: red;
+    border-color: rgb(213, 0, 0);
     border-width: 2px;
+}
+
+.bigLetter{
+    height: 130px;
+    width: 130px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#resetButton{
+    height: 30px;
+    width: 80px;
+    background-color: rgb(213, 0, 0);
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 3px;
+    border-style: solid;
+    border-color: rgb(17, 17, 17);
 }
