@@ -63,10 +63,10 @@ function playerTurn(event){
         //X's turn
         box.textContent = "X"
         console.log(gameWon[prevMove -1])
-            let highlight = document.querySelector(`#game-${gameSwap}`)
-            highlight.classList.add("highlight")
             let deHighlight = document.querySelector(`#game-${prevMove}`)
             deHighlight.classList.remove("highlight")
+            let highlight = document.querySelector(`#game-${gameSwap}`)
+            highlight.classList.add("highlight")
         prevMove = gameSwap
         console.log(prevMove)
         alerter.textContent = "O's turn"
@@ -77,10 +77,10 @@ function playerTurn(event){
     //O's turn
     console.log(gameWon[prevMove -1])
     box.textContent = "O"
-        let highlight = document.querySelector(`#game-${gameSwap}`)
-        highlight.classList.add("highlight")
         let deHighlight = document.querySelector(`#game-${prevMove}`)
         deHighlight.classList.remove("highlight")
+        let highlight = document.querySelector(`#game-${gameSwap}`)
+        highlight.classList.add("highlight")
     prevMove = gameSwap
     console.log(prevMove)
     alerter.textContent = "X's turn"
@@ -90,10 +90,10 @@ function playerTurn(event){
     //X's turn for free move if next game is already won
     box.textContent = "X"
     console.log(gameWon[prevMove -1])
-        let highlight = document.querySelector(`#game-${gameSwap}`)
-        highlight.classList.add("highlight")
         let deHighlight = document.querySelector(`#game-${prevMove}`)
         deHighlight.classList.remove("highlight")
+        let highlight = document.querySelector(`#game-${gameSwap}`)
+        highlight.classList.add("highlight")
     prevMove = gameSwap
     console.log(prevMove)
     alerter.textContent = "O's turn"
@@ -103,10 +103,10 @@ function playerTurn(event){
     //O's turn for free move if next game is already won
     box.textContent = "O"
     console.log(gameWon[prevMove -1])
-        let highlight = document.querySelector(`#game-${gameSwap}`)
-        highlight.classList.add("highlight")
         let deHighlight = document.querySelector(`#game-${prevMove}`)
         deHighlight.classList.remove("highlight")
+        let highlight = document.querySelector(`#game-${gameSwap}`)
+        highlight.classList.add("highlight")
     prevMove = gameSwap
     console.log(prevMove)
     alerter.textContent = "X's turn"
@@ -179,8 +179,8 @@ function bigWin(){
     //setting initial check variables
     let games = document.querySelectorAll(".indieGames");
     let plays = [];
-    X = '<img src="./img/red-x.png" class="bigX">';
-    O = '<img src="./img/red-o.png" class="bigO">';
+    let X = '<img src="./img/red-x.png" class="bigX">';
+    let O = '<img src="./img/red-o.png" class="bigO">';
 
     for(let i=0; i<games.length; i++){
         plays.push(games[i].innerHTML)
