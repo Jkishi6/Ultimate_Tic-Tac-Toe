@@ -1,3 +1,4 @@
+//initial global variables
 let turnCounter = 0
 
 let gameWon = new Array(9).fill(false)
@@ -44,71 +45,54 @@ function makeTable(){
 
 makeTable();
 
+//set initial highlight
 let startingBox = document.querySelector("#game-5")
 startingBox.classList.add("highlight")
 
+//set initial play box
 let prevMove =5;
 let boxCheck = 5;
 
 function playerTurn(event){
-   let box = document.getElementById(event)
+   //getting values for box position
+    let box = document.getElementById(event)
 
    // id = box-(idConv)-(gameSwap)
    let idGet = box.id
-   //console.log(idGet)
    let idConv = idGet.charAt(4) //current game
    let gameSwap = idGet.charAt(6) //next game
    
     if (gameWon[prevMove - 1] == false && turnCounter%2 == 0 && box.innerText== "" && boxCheck == idConv){
         //X's turn
-        box.textContent = "X"
-        console.log(gameWon[prevMove -1])
-            let deHighlight = document.querySelector(`#game-${prevMove}`)
-            deHighlight.classList.remove("highlight")
-            let highlight = document.querySelector(`#game-${gameSwap}`)
-            highlight.classList.add("highlight")
+        box.innerHTML = `<img src="./img/red-x.png" class="lilX">`
+
+        highlight(prevMove, gameSwap)
         prevMove = gameSwap
-        console.log(prevMove)
         alerter.textContent = "O's turn"
         boxCheck = gameSwap
         
    }
    else if (gameWon[prevMove - 1] == false && turnCounter%2 == 1 && box.innerText=="" && boxCheck == idConv){
     //O's turn
-    console.log(gameWon[prevMove -1])
-    box.textContent = "O"
-        let deHighlight = document.querySelector(`#game-${prevMove}`)
-        deHighlight.classList.remove("highlight")
-        let highlight = document.querySelector(`#game-${gameSwap}`)
-        highlight.classList.add("highlight")
+    box.innerHTML = `<img src="./img/red-o.png" class="lilO">`
+    highlight(prevMove, gameSwap)
     prevMove = gameSwap
-    console.log(prevMove)
     alerter.textContent = "X's turn"
     boxCheck = gameSwap
    }
    else if(gameWon[prevMove - 1] == true && turnCounter%2 == 0 && box.innerText==""){
     //X's turn for free move if next game is already won
-    box.textContent = "X"
-    console.log(gameWon[prevMove -1])
-        let deHighlight = document.querySelector(`#game-${prevMove}`)
-        deHighlight.classList.remove("highlight")
-        let highlight = document.querySelector(`#game-${gameSwap}`)
-        highlight.classList.add("highlight")
+    box.innerHTML = `<img src="./img/red-x.png" class="lilX">`
+    highlight(prevMove, gameSwap)
     prevMove = gameSwap
-    console.log(prevMove)
     alerter.textContent = "O's turn"
     boxCheck = gameSwap
    }
    else if(gameWon[prevMove - 1] == true && turnCounter%2 == 1 && box.innerText==""){
     //O's turn for free move if next game is already won
-    box.textContent = "O"
-    console.log(gameWon[prevMove -1])
-        let deHighlight = document.querySelector(`#game-${prevMove}`)
-        deHighlight.classList.remove("highlight")
-        let highlight = document.querySelector(`#game-${gameSwap}`)
-        highlight.classList.add("highlight")
+    box.innerHTML = `<img src="img/red-o.png" class="lilO">`
+    highlight(prevMove, gameSwap)
     prevMove = gameSwap
-    console.log(prevMove)
     alerter.textContent = "X's turn"
     boxCheck = gameSwap
    }
@@ -118,12 +102,10 @@ function playerTurn(event){
    }
    else{
     alerter.textContent = `Please play in the correct game`
-    console.log(prevMove)
     turnCounter--
    }
    
    turnCounter++
-   //console.log(boxCheck)
 
    smallWin(idGet)
    bigWin()
@@ -134,40 +116,53 @@ function playerTurn(event){
    }
 }
 
+function highlight(prev, next){
+    let deHighlight = document.querySelector(`#game-${prev}`)
+    deHighlight.classList.remove("highlight")
+    let highlight = document.querySelector(`#game-${next}`)
+    highlight.classList.add("highlight")
+}//highlights the game player plays in
+
+function winCheck(con, I){
+   
+    if(con[0] ==I && con[1] ==I && con[2] ==I || con[3] ==I && con[4] ==I && con[5] ==I || con[6] ==I && con[7] ==I && con[8] ==I ||
+        con[0] ==I && con[3] ==I && con[6] ==I || con[1] ==I && con[4] ==I && con[7] ==I || con[2] ==I && con[5] ==I && con[8] ==I || 
+        con[0] ==I && con[4] ==I && con[8] ==I || con[2] ==I && con[4] ==I && con[6] ==I){
+            return true
+        }
+    else{
+        return false
+    }
+    //spaghetti code for winchecking    
+}
+
 //small game win check
 function smallWin(event){
     let getGame = event.charAt(4)
     let currentGame = document.querySelector(`#game-${getGame}`)
     let boxes = document.querySelectorAll(`.game${getGame}`)
     let plays = [];
+    let X = '<img src="./img/red-x.png" class="lilX">';
+    let O = '<img src="./img/red-o.png" class="lilO">';
 
     for(let i=0; i<boxes.length; i++){
         plays.push(boxes[i].innerHTML)
     }
-    //console.log(plays[event.charAt(6)])
-    
+
     //checks if x win small game
-    if(plays[0]=="X" && plays[1]=="X" && plays[2]=="X" || plays[3]=="X" && plays[4]=="X" && plays[5]=="X" || plays[6]=="X" && plays[7]=="X" && plays[8]=="X" ||
-        plays[0]=="X" && plays[3]=="X" && plays[6]=="X" || plays[1]=="X" && plays[4]=="X" && plays[7]=="X" || plays[2]=="X" && plays[5]=="X" && plays[8]=="X" || 
-        plays[0]=="X" && plays[4]=="X" && plays[8]=="X" || plays[2]=="X" && plays[4]=="X" && plays[6]=="X") //spaghetti code for win conditions
+    if(winCheck(plays, X) == true)
         {
-            console.log("x win game")
 
             currentGame.innerHTML = `<img src="./img/red-x.png" class="bigX">`
             gameWon[getGame - 1] = true
-            console.log(gameWon)
 
     }
     //check of o win small game
-    else if(plays[0]=="O" && plays[1]=="O" && plays[2]=="O" || plays[3]=="O" && plays[4]=="O" && plays[5]=="O" || plays[6]=="O" && plays[7]=="O" && plays[8]=="O" ||
-    plays[0]=="O" && plays[3]=="O" && plays[6]=="O" || plays[1]=="O" && plays[4]=="O" && plays[7]=="O" || plays[2]=="O" && plays[5]=="O" && plays[8]=="O" || 
-    plays[0]=="O" && plays[4]=="O" && plays[8]=="O" || plays[2]=="O" && plays[4]=="O" && plays[6]=="O")
+    else if(winCheck(plays, O) == true)
     {
-        console.log("o win game")
 
         currentGame.innerHTML = `<img src="./img/red-o.png" class="bigO">`
             gameWon[getGame - 1] = true
-            console.log(gameWon)
 }
     else{
         console.log("no current game win")
@@ -187,17 +182,13 @@ function bigWin(){
     }
 
     //check for if x wins whole game
-    if(plays[0] ==X && plays[1] ==X && plays[2] ==X || plays[3] ==X && plays[4] ==X && plays[5] ==X || plays[6] ==X && plays[7] ==X && plays[8] ==X ||
-        plays[0] ==X && plays[3] ==X && plays[6] ==X || plays[1] ==X && plays[4] ==X && plays[7] ==X || plays[2] ==X && plays[5] ==X && plays[8] ==X || 
-        plays[0] ==X && plays[4] ==X && plays[8] ==X || plays[2] ==X && plays[4] ==X && plays[6] ==X)
+    if(winCheck(plays, X))
         {
             gameOver = true
             alerter.textContent = "X wins!"
     }
     //check for if o wins whole game
-    else if(plays[0]==O && plays[1]==O && plays[2]==O || plays[3]==O && plays[4]==O && plays[5]==O || plays[6]==O && plays[7]==O && plays[8]==O ||
-    plays[0]==O && plays[3]==O && plays[6]==O || plays[1]==O && plays[4]==O && plays[7]==O || plays[2]==O && plays[5]==O && plays[8]==O || 
-    plays[0]==O && plays[4]==O && plays[8]==O || plays[2]==O && plays[4]==O && plays[6]==O)
+    else if(winCheck(plays, O))
     {
         gameOver = true
         alerter.textContent = "O wins!"
